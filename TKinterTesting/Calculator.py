@@ -1,24 +1,28 @@
 import tkinter as tk
 
 window = tk.Tk()
-side = True # left is true, right is false
+window.title('Calculator')
+window['bg']='black'
 
 # Formats float to remove trailing zeros 
 def floatToString(inputValue):
-    return ('%.3f' % inputValue).rstrip("0").rstrip(".")
-    
+    return ('%.3f' % inputValue).rstrip("0").rstrip(".")    
+
+def sideCheck():
+    side = True
+    if (lbl_op["text"] != ""):
+        side = False
+    return side
+
 def add():
-    global side
     if lbl_ans["text"] != "":
         temp = lbl_ans["text"]
         clear()
         lbl_left["text"] = temp
     lbl_op["text"] = "+"
-    side = False
         
 
 def subtract():
-    global side
     if lbl_ans["text"] != "":
         temp = lbl_ans["text"]
         clear()
@@ -27,7 +31,6 @@ def subtract():
     side = False
 
 def multiply():
-    global side
     if lbl_ans["text"] != "":
         temp = lbl_ans["text"]
         clear()
@@ -36,7 +39,6 @@ def multiply():
     side = False
 
 def divide():
-    global side
     if lbl_ans["text"] != "":
         temp = lbl_ans["text"]
         clear()
@@ -45,7 +47,7 @@ def divide():
     side = False
 
 def one():
-    global side
+    side = sideCheck()
     if lbl_ans["text"] != "":
         clear()
     if side:
@@ -54,7 +56,7 @@ def one():
         lbl_right["text"] += "1"
 
 def two():
-    global side
+    side = sideCheck()
     if lbl_ans["text"] != "":
         clear()
     if side:
@@ -63,7 +65,7 @@ def two():
         lbl_right["text"] += "2"
 
 def three():
-    global side
+    side = sideCheck()
     if lbl_ans["text"] != "":
         clear()
     if side:
@@ -72,7 +74,7 @@ def three():
         lbl_right["text"] += "3"
 
 def four():
-    global side
+    side = sideCheck()
     if lbl_ans["text"] != "":
         clear()
     if side:
@@ -81,7 +83,7 @@ def four():
         lbl_right["text"] += "4"
 
 def five():
-    global side
+    side = sideCheck()
     if lbl_ans["text"] != "":
         clear()
     if side:
@@ -90,7 +92,7 @@ def five():
         lbl_right["text"] += "5"
 
 def six():
-    global side
+    side = sideCheck()
     if lbl_ans["text"] != "":
         clear()
     if side:
@@ -99,7 +101,7 @@ def six():
         lbl_right["text"] += "6"
 
 def seven():
-    global side
+    side = sideCheck()
     if lbl_ans["text"] != "":
         clear()
     if side:
@@ -108,7 +110,7 @@ def seven():
         lbl_right["text"] += "7"
 
 def eight():
-    global side
+    side = sideCheck()
     if lbl_ans["text"] != "":
         clear()
     if side:
@@ -117,7 +119,7 @@ def eight():
         lbl_right["text"] += "8"
 
 def nine():
-    global side
+    side = sideCheck()
     if lbl_ans["text"] != "":
         clear()
     if side:
@@ -126,7 +128,7 @@ def nine():
         lbl_right["text"] += "9"
 
 def zero():
-    global side
+    side = sideCheck()
     if lbl_ans["text"] != "":
         clear()
     if side:
@@ -135,19 +137,17 @@ def zero():
         lbl_right["text"] += "0"
 
 def decimal():
-    global side
+    side = sideCheck()
     if side and "." not in lbl_left["text"]:
         lbl_left["text"] += "."
     elif not side and "." not in lbl_right["text"]:
         lbl_right["text"] += "."
 
 def clear():
-    global side
     lbl_left["text"] = ""
     lbl_right["text"] = ""
     lbl_op["text"] = ""
     lbl_ans["text"] = ""
-    side = True
 
 def equal():
     if lbl_ans["text"] != "":
@@ -163,7 +163,7 @@ def equal():
         lbl_ans["text"] = floatToString(float(lbl_left["text"]) / float(lbl_right["text"]))
 
 def sign():
-    global side
+    side = sideCheck()
     if side:
         if "-" not in lbl_left["text"]:
             lbl_left["text"] = "-" + lbl_left["text"]
@@ -179,16 +179,16 @@ def sign():
 window.rowconfigure([0, 1, 2, 3, 4, 5], minsize=50, weight=1)
 window.columnconfigure([0, 1, 2, 3], minsize=50, weight=1)
 
-lbl_left = tk.Label(master=window, text="")
+lbl_left = tk.Label(master=window, text="", bg='black')
 lbl_left.grid(row=0, column=0)
 
-lbl_op = tk.Label(master=window, text="")
+lbl_op = tk.Label(master=window, text="", bg='black')
 lbl_op.grid(row=0, column=1)
 
-lbl_right = tk.Label(master=window, text="")
+lbl_right = tk.Label(master=window, text="", bg='black')
 lbl_right.grid(row=0, column=2)
 
-lbl_ans = tk.Label(master=window, text="")
+lbl_ans = tk.Label(master=window, text="", bg='black')
 lbl_ans.grid(row=0, column=3)
 
 btn_subtract = tk.Button(master=window, text="-", command=subtract)
