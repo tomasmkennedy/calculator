@@ -3,7 +3,7 @@ import yaml
 from tkmacosx import Button
 
 # Begin configuration file
-config = yaml.safe_load(open("/Users/tomaskennedy/Documents/PythonProjects/TKinterTesting/config.yml"))
+config = yaml.safe_load(open("config.yml"))
 
 # Color class for backgrounds
 class Background:
@@ -35,21 +35,21 @@ lblFg_var = tk.StringVar()
 operators = ['+', '-', '*', '/', '%']
 
 def reset_settings(setting):
-    if setting is "opBg":
+    if setting == "opBg":
         config["opBg"] = config["opDefaultBg"]
-    elif setting is "numBg":
+    elif setting == "numBg":
         config["numBg"] = config["numDefaultBg"]
-    elif setting is "modBg":
+    elif setting == "modBg":
         config["modBg"] = config["modDefaultBg"]
-    elif setting is "lblBg":
+    elif setting == "lblBg":
         config["lblBg"] = config["lblDefaultBg"]
-    elif setting is "opFg":
+    elif setting == "opFg":
         config["opFg"] = config["opDefaultFg"]
-    elif setting is "numFg":
+    elif setting == "numFg":
         config["numFg"] = config["numDefaultFg"]
-    elif setting is "modFg":
+    elif setting == "modFg":
         config["modFg"] = config["modDefaultFg"]
-    elif setting is "lblFg":
+    elif setting == "lblFg":
         config["lblFg"] = config["lblDefaultFg"]
 def update_settings():
     window['bg'] = Background.lbl
@@ -69,7 +69,7 @@ def update_settings():
     btn_nine['bg'] = Background.num
     btn_one['bg'] = Background.num
     btn_percent['bg'] = Background.mod
-    btn_settings['bg'] = Background.op
+    btn_settings['bg'] = Background.mod
     btn_seven['bg'] = Background.num
     btn_sign['bg'] = Background.mod
     btn_six['bg'] = Background.num
@@ -94,7 +94,7 @@ def update_settings():
     btn_nine['fg'] = Foreground.num
     btn_one['fg'] = Foreground.num
     btn_percent['fg'] = Foreground.mod
-    btn_settings['fg'] = Foreground.op
+    btn_settings['fg'] = Foreground.mod
     btn_seven['fg'] = Foreground.num
     btn_sign['fg'] = Foreground.mod
     btn_six['fg'] = Foreground.num
@@ -233,7 +233,8 @@ def floatToString(inputValue):
     return ('%.3f' % inputValue).rstrip("0").rstrip(".")
     
 def sideCheck():
-    side = True
+    # True is left, False is right
+    side = True 
     if (lbl_op["text"] != ""):
         side = False
     return side
@@ -243,35 +244,40 @@ def add():
         temp = lbl_ans["text"]
         clear()
         lbl_left["text"] = temp
-    lbl_op["text"] = "+"
+    if lbl_left["text"] != "":
+        lbl_op["text"] = "+"
 
 def subtract():
     if lbl_ans["text"] != "":
         temp = lbl_ans["text"]
         clear()
         lbl_left["text"] = temp
-    lbl_op["text"] = "-"
+    if lbl_left["text"] != "":
+        lbl_op["text"] = "-"
 
 def multiply():
     if lbl_ans["text"] != "":
         temp = lbl_ans["text"]
         clear()
         lbl_left["text"] = temp
-    lbl_op["text"] = "x"
+    if lbl_left["text"] != "":
+        lbl_op["text"] = "x"
 
 def divide():
     if lbl_ans["text"] != "":
         temp = lbl_ans["text"]
         clear()
         lbl_left["text"] = temp
-    lbl_op["text"] = "/"
+    if lbl_left["text"] != "":
+        lbl_op["text"] = "/"
 
 def percent():
     if lbl_ans["text"] != "":
         temp = lbl_ans["text"]
         clear()
         lbl_left["text"] = temp
-    lbl_op["text"] = "%"
+    if lbl_left["text"] != "":
+        lbl_op["text"] = "%"
 
 def one():
     side = sideCheck()
